@@ -6,9 +6,13 @@ const dicasGerais = require('./data-dg')
 const dicasTorneio = require('./data-dt')
 const { request } = require('express')
 
+var port = process.env.PORT || 5000
+
 server.use(express.static('public'))
 
-server.set("view engine", "njk")
+server.engine('html', nunjucks.render)
+
+server.set('view engine', 'html')
 
 nunjucks.configure("views",
     {
@@ -91,6 +95,6 @@ server.get("/dicas-torneio-more", function (req, res) {
 })
 
 
-server.listen(5000, function () {
-    console.log("running")
+server.listen(port, function () {
+    console.log("running in port ", `${port}`)
 })
